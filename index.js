@@ -24,7 +24,7 @@ function todosCallback(data){
 
         var span1 = document.createElement("span");
         span1.innerHTML = data[i].title;
-        
+
         var span2 = document.createElement("span");
         span2.innerHTML = data[i].description;
 
@@ -54,27 +54,28 @@ function parsedResponse(data){
     console.log(data);
     var parentElement = document.getElementById("mainArea");
     var childElement = document.createElement("div");
+    childElement.setAttribute("id", "todo_" + data.id);
 
     var span1 = document.createElement("span");
     span1.innerHTML = data.title;
-    
+
     var span2 = document.createElement("span");
     span2.innerHTML = data.description;
 
     var deleteButton = document.createElement("button");
     deleteButton.innerHTML = "Delete";
-    
+    deleteButton.setAttribute("onclick","deleteTodo(" + data.id + ")")
 
     childElement.appendChild(span1)
     childElement.appendChild(span2)
     childElement.appendChild(deleteButton)
 
     parentElement.appendChild(childElement);
-    
+
 }
 function callback(resp){
     resp.json().then(parsedResponse);
-}   
+}
 function onPress(){
     var title = document.getElementById("title").value;
     var description = document.getElementById("description").value;
@@ -91,4 +92,3 @@ function onPress(){
 
     }).then(callback)
 }
-
